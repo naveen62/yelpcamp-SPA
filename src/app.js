@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 
 import AppRouter from './routes/AppRouter';
 
+
 import './styles/styles.scss'
 import 'normalize.css/normalize.css'
 import './styles/bootstrap.min.css';

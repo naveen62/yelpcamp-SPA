@@ -5,7 +5,10 @@ import CampgroundListitems from './CampgroundListitems'
 const CampgroundList = (props) => (
     <div>
         <div className='row'>
-            {props.camps.map((camp) => <CampgroundListitems key={camp._id} {...camp} />)}
+            {
+                props.camps.length == 0 ? <h1>No Campgrounds</h1> : 
+                props.camps.map((camp) => <CampgroundListitems key={camp._id} {...camp} />)
+            }
         </div>
     </div>
 )

@@ -19,7 +19,7 @@ router.post('/user', (req, res) => {
             newUser.save().then((user) => {
                 return newUser.genAuthToken();
             }).then((token) => {
-                res.header('x-auth', token).send(newUser)
+                res.header('x-auth', token).send({newUser, token})
             }).catch((e) => {
                 res.status(400).send({
                     err: true,
@@ -50,7 +50,7 @@ router.post('/user/login', (req, res) => {
                 return Reject();
             }
     }).then((token) => {
-        res.header('x-auth', token).send(SendUser)
+        res.header('x-auth', token).send({SendUser, token})
     }).catch((e) => {
         res.status(400).send({e})
     })
