@@ -16,6 +16,9 @@ import Campground from '../dashboard/Campground'
 import User from '../dashboard/User';
 import EditCampground from '../dashboard/EditCampground';
 
+import PrivateRoute from './PrivateRouter';
+import PublicRoute from './PublicRouter';
+
 export const history = createHistory()
 
 class AppRouter extends React.Component {
@@ -57,9 +60,9 @@ class AppRouter extends React.Component {
                 <Route path='/campgrounds' exact={true} component={(props) => <Campgrounds {...props} test='work' /> } />
                 <Route path='/campgrounds/new' exact={true} component={AddCampground} />
                 <Route path='/campgrounds/:id' exact={true} component={Campground} />
-                <Route path='/campgrounds/:id/edit' component={EditCampground} />
-                <Route path='/signin' component={(props) => <User {...props} headText='Sign In' buttonText='Sign In'/> } />
-                <Route path='/signup' component={(props) => <User {...props} headText='Sign Up' buttonText='Sign Up'/> } />
+                <PrivateRoute path='/campgrounds/:id/edit' component={EditCampground} />
+                <PublicRoute path='/signin' component={(props) => <User {...props} headText='Sign In' buttonText='Sign In'/> } />
+                <PublicRoute path='/signup' component={(props) => <User {...props} headText='Sign Up' buttonText='Sign Up'/> } />
             </Switch>
         </div>
         </Router>
