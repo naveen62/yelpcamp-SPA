@@ -2,11 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {ToastContainer, toast} from 'react-toastify'
 
 class Cardimage extends React.Component {
     
     handleDel = () => {
-        axios.delete(`http://localhost:3000/api/campground/${this.props._id}`, {
+        toast.info('Deleting...')
+        axios.put(`http://localhost:3000/api/campground/${this.props._id}`,{
+            imgId: this.props.image && this.props.image.id
+        }, {
             headers: {'x-auth': `${this.props.auth.token}`}
         }).then((res) => {
             this.props.Onclick(this.props._id)
@@ -42,6 +46,7 @@ class Cardimage extends React.Component {
                     {this.props.description}
                 </p>
             </div>
+            <ToastContainer autoClose={false} />
         </div>
         )
     }

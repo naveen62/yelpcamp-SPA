@@ -96,12 +96,15 @@ router.patch('/campground/:id',upload.single('image'),auth, (req, res) => {
     }
 
 })
-router.delete('/campground/:id',auth, (req, res) => {
-    const id = req.params.id;
-    Campground.findOneAndRemove({_id: id}).then((campground) => {
-        res.send({campground}).status(200);
-    }).catch((e) => {
-        console.log(e)
+router.put('/campground/:id',auth, (req, res) => {
+    cloudinary.v2.uploader.destroy(req.body.imgId, (error, result) => {
+
+        const id = req.params.id;
+        Campground.findOneAndRemove({_id: id}).then((campground) => {
+            res.send({campground}).status(200);
+        }).catch((e) => {
+            console.log(e)
+        })
     })
 })
 

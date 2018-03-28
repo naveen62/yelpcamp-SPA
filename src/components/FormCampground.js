@@ -10,9 +10,9 @@ class FormCampground extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: props.camp ? props.camp.name : undefined,
-            price: props.camp ? props.camp.price : undefined,
-            description: props.camp ? props.camp.description : undefined,
+            name: props.camp ? props.camp.name : '',
+            price: props.camp ? props.camp.price : '',
+            description: props.camp ? props.camp.description : '',
             selectedFile: null,
             loading: false,
             alert: false

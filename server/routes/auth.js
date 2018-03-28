@@ -56,7 +56,7 @@ router.post('/user/login', (req, res) => {
     })
 })
 router.get('/user/token/me',auth, (req, res) => {
-    res.send(req.user);
+    res.send({user: req.user});
 })
 router.get('/user/logout',auth, (req, res) => {
     User.findOneAndUpdate({_id: req.user._id}, {

@@ -1,9 +1,14 @@
 import React from 'react';
 import {Router, Route, Switch} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import {connect} from 'react-redux'
+import MDSpinner from 'react-md-spinner';
 
 import Home from '../components/Home';
 import NavBar from '../components/Navbar';
+import {addUser} from '../actions/auth'
 
 import Campgrounds from '../dashboard/Campgrounds';
 import AddCampground from '../dashboard/AddCampground';
@@ -13,8 +18,37 @@ import EditCampground from '../dashboard/EditCampground';
 
 export const history = createHistory()
 
-const AppRouter = () => (
-    <div>
+class AppRouter extends React.Component {
+        state = {
+            visit: false
+        }
+    componentWillMount(){
+        const token = Cookies.get('token');
+        if(token) {
+        axios.get('http://localhost:3000/api/user/token/me', {
+            headers: {'x-auth': token}
+        }).then((res) => {
+            this.props.dispatch(addUser(res.data.user, token))
+            this.setState(() => ({
+                visit: true
+            }))
+        }).catch((err) => {
+
+        })
+      } else {
+          this.setState(() => ({
+              visit: true
+          }))
+      }
+    }
+
+    render() {
+        return (
+            <div>
+                {
+                    this.state.visit ? (
+                        <div>
+                        <div>
         <Router history={history}>
         <div>
             <NavBar />
@@ -30,6 +64,16 @@ const AppRouter = () => (
         </div>
         </Router>
     </div>
-)
+                        </div>
+                    ) : (
+                        <div className='page-loader'>
+                            <MDSpinner size={100} />
+                        </div>
+                    )
+                }
+            </div>
+        )
+    }
+}
 
-export default AppRouter;
+export default connect()(AppRouter);
