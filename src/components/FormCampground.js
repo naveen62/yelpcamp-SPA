@@ -62,7 +62,12 @@ class FormCampground extends React.Component {
             fd.append('imgId', this.props.camp.image.id);
         }
         if(!this.props.camp) {
-        axios.post('http://localhost:3000/api/campground', fd, header)
+        axios.post('http://localhost:3000/api/campground', fd, {
+            headers: {'x-auth': `${this.props.auth.token}`},
+            onUploadProgress: e => {
+                console.log('Upload progress ', Math.round(e.loaded / e.total * 100) + '%')
+            }
+        })
         .then((res) => {
             console.log(res.data.campground)
             this.props.onSubmit(res.data.campground)

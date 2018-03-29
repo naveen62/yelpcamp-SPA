@@ -27,8 +27,7 @@ router.post('/user', (req, res) => {
                 })
             })
         } else {
-            res.status(400)
-            res.send({
+            res.status(403).send({
                 err: true,
                 msg: 'email address already exists'
             })
@@ -52,7 +51,7 @@ router.post('/user/login', (req, res) => {
     }).then((token) => {
         res.header('x-auth', token).send({SendUser, token})
     }).catch((e) => {
-        res.status(400).send({e})
+        res.status(400).send({err: e, msg: 'Email or password did not match'})
     })
 })
 router.get('/user/token/me',auth, (req, res) => {

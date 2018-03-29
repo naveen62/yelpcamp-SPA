@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import MDSpinner from 'react-md-spinner';
 import {connect} from 'react-redux';
 import {addUser} from '../actions/auth';
+import {ToastContainer, toast} from 'react-toastify'
 
 class UserForm extends React.Component {
     state = {
@@ -37,7 +38,10 @@ class UserForm extends React.Component {
                 Cookies.set('token', `${res.data.token}`);
                 this.props.onSubmit()
             }).catch((err) => {
-                console.log(err)
+                this.setState(() => ({
+                    loading: false
+                }))
+                toast.error(`${err.response.data.msg}`)
             })
         } else if(window.location.pathname == '/signin') {
             this.setState(() => ({
@@ -51,7 +55,10 @@ class UserForm extends React.Component {
                 Cookies.set('token', `${res.data.token}`);
                 this.props.onSubmit()
             }).catch((err) => {
-                console.log(err)
+                this.setState(() => ({
+                    loading: false
+                }))
+                toast.error(`${err.response.data.msg}`)
             })
         }
     }
@@ -71,6 +78,7 @@ class UserForm extends React.Component {
                     {this.state.loading ? <MDSpinner size={30} singleColor='#ffff'/>: this.props.button}
                     </button>
                 </form>
+                <ToastContainer autoClose={3000} />
             </div>
         )
     }
