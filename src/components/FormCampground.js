@@ -62,7 +62,7 @@ class FormCampground extends React.Component {
             fd.append('imgId', this.props.camp.image.id);
         }
         if(!this.props.camp) {
-        axios.post('http://localhost:3000/api/campground', fd, {
+        axios.post(`${window.location.protocol}//${window.location.hostname}/api/campground`, fd, {
             headers: {'x-auth': `${this.props.auth.token}`},
             onUploadProgress: e => {
                 console.log('Upload progress ', Math.round(e.loaded / e.total * 100) + '%')
@@ -75,7 +75,7 @@ class FormCampground extends React.Component {
             console.log(err)
         })
       } else {
-        axios.patch(`http://localhost:3000/api/campground/${this.props.camp._id}`, fd, header)
+        axios.patch(`${window.location.protocol}//${window.location.hostname}/api/campground/${this.props.camp._id}`, fd, header)
         .then((res) => {
             console.log(res.data.campground)
             this.props.onSubmit(res.data.campground._id ,res.data.campground)

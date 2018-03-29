@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 class Navbar extends React.Component {
   
   handleLogout = () => {
-    axios.get('http://localhost:3000/api/user/logout', {
+    axios.get(`${window.location.protocol}//${window.location.hostname}/api/user/logout`, {
       headers: {'x-auth': `${this.props.auth.token}`}
     }).then((res) => {
       console.log(res.data);

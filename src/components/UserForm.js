@@ -30,7 +30,7 @@ class UserForm extends React.Component {
             this.setState(() => ({
                 loading: true
             }))
-            axios.post('http://localhost:3000/api/user', {
+            axios.post(`${window.location.protocol}//${window.location.hostname}/api/user`, {
                 email: this.state.email,
                 password: this.state.password
             }).then((res) => {
@@ -47,7 +47,7 @@ class UserForm extends React.Component {
             this.setState(() => ({
                 loading: true
             }))
-            axios.post('http://localhost:3000/api/user/login', {
+            axios.post(`${window.location.protocol}//${window.location.hostname}/api/user/login`, {
                 email: this.state.email,
                 password: this.state.password
             }).then((res) => {

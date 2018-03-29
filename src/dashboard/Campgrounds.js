@@ -15,7 +15,7 @@ class Campgrounds extends React.Component {
     }
     componentDidMount() {
         if(!this.props.camps.length > 0) {
-            axios.get('http://localhost:3000/api/campground')
+            axios.get(`${window.location.protocol}//${window.location.hostname}/api/campground`)
                 .then((res) => {
                     const data = res.data.campground
                     this.setState(() => {

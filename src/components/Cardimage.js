@@ -8,7 +8,7 @@ class Cardimage extends React.Component {
     
     handleDel = () => {
         toast.info('Deleting...')
-        axios.put(`http://localhost:3000/api/campground/${this.props._id}`,{
+        axios.put(`${window.location.protocol}//${window.location.hostname}/api/campground/${this.props._id}`,{
             imgId: this.props.image && this.props.image.id
         }, {
             headers: {'x-auth': `${this.props.auth.token}`}

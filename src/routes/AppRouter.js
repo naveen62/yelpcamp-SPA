@@ -28,7 +28,7 @@ class AppRouter extends React.Component {
     componentWillMount(){
         const token = Cookies.get('token');
         if(token) {
-        axios.get('http://localhost:3000/api/user/token/me', {
+        axios.get(`${window.location.protocol}//${window.location.hostname}/api/user/token/me`, {
             headers: {'x-auth': token}
         }).then((res) => {
             this.props.dispatch(addUser(res.data.user, token))
