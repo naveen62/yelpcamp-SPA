@@ -1,3 +1,4 @@
+require('./config/config');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -7,13 +8,15 @@ const publicPath = path.join(__dirname, '..', 'public');
 const campRoutes = require('./routes/campground');
 const authRoutes = require('./routes/auth');
 
+const port = process.env.PORT || 3000;
+
 const app = express();
 app.use(bodyParser.json());
 app.use(express.static(publicPath));
 app.set('views', path.join(__dirname, '/views'))
 app.set('view engine', 'ejs')
 
-mongoose.connect('mongodb://127.0.0.1/yelpcamp').then(() => {
+mongoose.connect(process.env.DATABASEURL).then(() => {
     console.log('connected')
 }).catch((err) => {
     console.log(err)
@@ -33,6 +36,6 @@ app.use('/api', authRoutes);
 app.get('*', (req, res) => {
     res.render('yelpcamp')
 })
-app.listen(3000, () => {
+app.listen(port, () => {
     console.log('Server is running')
 })
