@@ -13,11 +13,14 @@
     display: flex;
 }
 html {
-    padding: 60px;
+    padding-top: 60px;
 }
 .page-loader {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-top: 20%;
+}
+.point {
+    cursor: pointer;
 }

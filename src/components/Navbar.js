@@ -32,7 +32,7 @@ class Navbar extends React.Component {
       <ul className="navbar-nav">
       {this.props.auth.email ? (
         <div className='navs'>
-        <li className="nav-item">
+        <li className="nav-item point">
           <a onClick={this.handleLogout} className='nav-link'>Logout</a>
         </li>
         </div>
