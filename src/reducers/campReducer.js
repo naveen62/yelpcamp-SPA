@@ -13,7 +13,7 @@ const campReducer = (state = [], action) => {
                         ...action.campground
                     }
                 } else {
-                    camp
+                  return  camp
                 }
             })
         case 'REMOVE_CAMPGROUND':
