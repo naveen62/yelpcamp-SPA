@@ -78,7 +78,9 @@ class FormCampground extends React.Component {
         axios.patch(`${window.location.protocol}//${window.location.hostname}/api/campground/${this.props.camp._id}`, fd, header)
         .then((res) => {
             console.log(res.data.campground)
-            this.props.onSubmit(res.data.campground._id ,res.data.campground)
+            if(res.data.campground) {
+                this.props.onSubmit(res.data.campground._id ,res.data.campground);
+            }
         }).catch((err) => {
             console.log(err)
         })
